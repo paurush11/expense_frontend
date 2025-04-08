@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* Theme 1 - Light */
+.theme-1 {
+    --gradient: linear-gradient(to top left, #000C40, #607D8B);
+    --background: 243 100% 98.26%;
+    --foreground: 243 10% 0.52%;
+    --muted: 243 10% 91.3%;
+    --muted-foreground: 243 5% 41.3%;
+    --popover: 243 10% 91.3%;
+    --popover-foreground: 243 10% 0.65%;
+    --card: 243 10% 91.3%;
+    --card-foreground: 243 10% 0.65%;
+    --border: 243 15% 89.52%;
+    --input: 243 15% 89.52%;
+    --primary: 243 100% 13%;
+    --primary-foreground: 243 2% 91.3%;
+    --secondary: 243 5% 95.65%;
+    --secondary-foreground: 243 7% 11.3%;
+    --accent: 243 5% 95.65%;
+    --accent-foreground: 243 7% 11.3%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 243 100% 13%;
+    --radius: 0.5rem;
+    /* Chat specific colors */
+    --message-sent: 243 100% 13%;
+    --message-sent-foreground: 243 2% 91.3%;
+    --message-received: 243 10% 91.3%;
+    --message-received-foreground: 243 10% 0.65%;
+    --chat-background: 243 20% 94%;
+    --success: 142 72% 29%;
+    --success-foreground: 142 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 48 96% 89%;
+    --info: 198 93% 60%;
+    --info-foreground: 198 0% 98%;
+    --surface: 243 30% 96%;
+    --surface-foreground: 243 10% 0.52%;
+    --highlight: 243 100% 84%;
+    --highlight-foreground: 243 100% 13%;
+    --neutral: 243 10% 80%;
+    --neutral-foreground: 243 10% 0.52%;
+}
+
+/* Theme 2 - Dark */
+.theme-2 {
+    --gradient: linear-gradient(to top left, #6da6be, #4b859e, #6da6be);
+    --background: 210 24.7% 4.72%;
+    --foreground: 210 3.8% 97.95%;
+    --muted: 210 19% 17.7%;
+    --muted-foreground: 210 3.8% 55.9%;
+    --popover: 210 57.4% 7.67%;
+    --popover-foreground: 210 3.8% 97.95%;
+    --card: 210 57.4% 7.67%;
+    --card-foreground: 210 3.8% 97.95%;
+    --border: 210 19% 17.7%;
+    --input: 210 19% 17.7%;
+    --primary: 210 38% 59%;
+    --primary-foreground: 210 3.8% 5.9%;
+    --secondary: 210 19% 17.7%;
+    --secondary-foreground: 210 3.8% 97.95%;
+    --accent: 210 19% 17.7%;
+    --accent-foreground: 210 3.8% 97.95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 3.8% 97.95%;
+    --ring: 210 38% 59%;
+    /* Chat specific colors */
+    --message-sent: 210 38% 59%;
+    --message-sent-foreground: 210 3.8% 5.9%;
+    --message-received: 210 19% 17.7%;
+    --message-received-foreground: 210 3.8% 97.95%;
+    --chat-background: 210 20% 15%;
+    --success: 142 72% 35%;
+    --success-foreground: 142 3.8% 97.95%;
+    --warning: 38 92% 40%;
+    --warning-foreground: 48 96% 89%;
+    --info: 198 93% 50%;
+    --info-foreground: 198 3.8% 97.95%;
+    --surface: 210 24% 12%;
+    --surface-foreground: 210 3.8% 97.95%;
+    --highlight: 210 38% 70%;
+    --highlight-foreground: 210 24.7% 4.72%;
+    --neutral: 210 19% 30%;
+    --neutral-foreground: 210 3.8% 97.95%;
+}
+
+@layer components {
+    .btn {
+        @apply rounded-lg px-4 py-2 font-medium transition-colors;
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+
+        &:hover {
+            @apply opacity-90;
+        }
+    }
+
+    .card {
+        @apply rounded-lg p-6;
+        background-color: hsl(var(--card));
+        color: hsl(var(--card-foreground));
+    }
+
+    .text-muted {
+        color: hsl(var(--muted-foreground));
+    }
+
+    .bg-muted {
+        background-color: hsl(var(--muted));
+    }
+
+    .gradient-bg {
+        background: var(--gradient);
+    }
+
+    .chat-container {
+        @apply h-full w-full bg-[hsl(var(--chat-background))] rounded-lg shadow-lg overflow-hidden;
+    }
+
+    .message-sent {
+        @apply bg-[hsl(var(--message-sent))] text-[hsl(var(--message-sent-foreground))] rounded-2xl rounded-tr-none;
+    }
+
+    .message-received {
+        @apply bg-[hsl(var(--message-received))] text-[hsl(var(--message-received-foreground))] rounded-2xl rounded-tl-none;
+    }
+
+    .chat-input {
+        @apply w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] border-[hsl(var(--border))] focus:ring-[hsl(var(--ring))];
+    }
+
+    .btn-success {
+        background-color: hsl(var(--success));
+        color: hsl(var(--success-foreground));
+    }
+
+    .btn-warning {
+        background-color: hsl(var(--warning));
+        color: hsl(var(--warning-foreground));
+    }
+
+    .btn-info {
+        background-color: hsl(var(--info));
+        color: hsl(var(--info-foreground));
+    }
+
+    .surface {
+        background-color: hsl(var(--surface));
+        color: hsl(var(--surface-foreground));
+    }
+
+    .highlight {
+        background-color: hsl(var(--highlight));
+        color: hsl(var(--highlight-foreground));
+    }
+
+    .neutral {
+        background-color: hsl(var(--neutral));
+        color: hsl(var(--neutral-foreground));
+    }
+}
