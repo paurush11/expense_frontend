@@ -1,49 +1,39 @@
-// To start the chat app:
-// cd expense_frontend/apps/chat
-// npm run dev
-
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { MainLayout } from './layouts/MainLayout'
-import { Login } from './components/Auth/Login'
-import { Signup } from './components/Auth/Signup'
-import { Home } from './components/Home/Home'
-import { AppProvider, useApp } from './providers/AppProvider'
+import { AppProvider } from './providers/AppProvider'
+import { RouterProvider, routes } from './providers/RouterProvider'
+import { ThemeProvider, useTheme } from './providers/ThemeProvider'
+import ToasterProvider from './providers/ToasterProvider'
+import { UserProvider, useUser } from './providers/UserProvider'
+
 
 
 function AppContent() {
-  const { isAuthenticated, theme, setTheme, login, signup, logout, user } = useApp()
-  const [showLogin, setShowLogin] = useState(true)
+  const { isAuthenticated, user } = useUser()
+  const { theme, setTheme } = useTheme()
+
+
+  useEffect(() => {
+    console.log('isAuthenticated', isAuthenticated)
+  }, [isAuthenticated])
 
   return (
     <MainLayout
+
       onThemeChange={setTheme}
-      isAuthenticated={isAuthenticated}
-      onLogin={() => setShowLogin(true)}
-      onSignup={() => setShowLogin(false)}
-      onLogout={logout}
       theme={theme}
     >
-      {!isAuthenticated ? (
-        showLogin ? (
-          <Login
-            onLogin={login}
-            onSwitchToSignup={() => setShowLogin(false)}
+      <Routes>
+        {routes().map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={route.element}
           />
-        ) : (
-          <Signup
-            onSignup={signup}
-            onSwitchToLogin={() => setShowLogin(true)}
-          />
-        )
-      ) : (
-        <>
-          <Home />
-          <div className="flex h-10 w-10">
-            <div id="chat-root"></div>
-            <div id="chat-widget-container"></div>
-          </div>
-        </>
-      )}
+        ))}
+
+      </Routes>
     </MainLayout>
   )
 }
@@ -51,7 +41,14 @@ function AppContent() {
 function App() {
   return (
     <AppProvider>
-      <AppContent />
+      <ThemeProvider>
+        <UserProvider>
+          <ToasterProvider />
+          <RouterProvider>
+            <AppContent />
+          </RouterProvider>
+        </UserProvider>
+      </ThemeProvider>
     </AppProvider>
   )
 }
