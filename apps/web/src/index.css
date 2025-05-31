@@ -36,6 +36,15 @@
     --highlight-foreground: 243 100% 13%;
     --neutral: 243 10% 80%;
     --neutral-foreground: 243 10% 0.52%;
+    --link: 210 100% 40%;
+    --link-foreground: 210 100% 98%;
+    --hover-background: 243 10% 85%;
+    --alternate-background: 243 5% 95%;
+    --divider: 243 15% 80%;
+    --shadow: 243 5% 15%;
+    --badge: 198 80% 40%;
+    --badge-foreground: 198 5% 98%;
+    --card-background-alt: 243 25% 95%;
 }
 
 /* Theme 5 - Dark */
@@ -73,6 +82,15 @@
     --highlight-foreground: 210 24.7% 4.72%;
     --neutral: 210 19% 30%;
     --neutral-foreground: 210 3.8% 97.95%;
+    --link: 210 100% 60%;
+    --link-foreground: 210 3.8% 97.95%;
+    --hover-background: 210 24% 10%;
+    --alternate-background: 210 24% 8%;
+    --divider: 210 19% 15%;
+    --shadow: 210 10% 5%;
+    --badge: 198 93% 40%;
+    --badge-foreground: 198 3.8% 97.95%;
+    --card-background-alt: 210 28% 8%;
 }
 
 @layer components {
@@ -90,6 +108,15 @@
         @apply rounded-lg p-6;
         background-color: hsl(var(--card));
         color: hsl(var(--card-foreground));
+    }
+
+    /* Shadow Styles */
+    .shadow-float {
+        @apply shadow-xl hover:shadow-xl transition-shadow duration-300;
+    }
+
+    .shadow-card {
+        @apply shadow-md hover:shadow-lg transition-all duration-300;
     }
 
     .text-muted {
@@ -110,6 +137,11 @@
         color: hsl(var(--success-foreground));
     }
 
+    .btn-primary {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+    }
+
     .btn-warning {
         background-color: hsl(var(--warning));
         color: hsl(var(--warning-foreground));
@@ -118,6 +150,16 @@
     .btn-info {
         background-color: hsl(var(--info));
         color: hsl(var(--info-foreground));
+    }
+
+    .btn-danger {
+        background-color: hsl(var(--danger));
+        color: hsl(var(--danger-foreground));
+    }
+
+    .btn-neutral {
+        background-color: hsl(var(--neutral));
+        color: hsl(var(--neutral-foreground));
     }
 
     .surface {

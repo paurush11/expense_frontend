@@ -6,6 +6,8 @@ import { RouterProvider, routes } from './providers/RouterProvider'
 import { ThemeProvider, useTheme } from './providers/ThemeProvider'
 import ToasterProvider from './providers/ToasterProvider'
 import { UserProvider, useUser } from './providers/UserProvider'
+import { TooltipProvider } from './providers/TooltipProvider'
+import { GlobalUIStateProvider } from './providers/GlobalUserInterfaceProvider'
 
 
 
@@ -41,14 +43,18 @@ function AppContent() {
 function App() {
   return (
     <AppProvider>
-      <ThemeProvider>
-        <UserProvider>
-          <ToasterProvider />
-          <RouterProvider>
-            <AppContent />
-          </RouterProvider>
-        </UserProvider>
-      </ThemeProvider>
+      <GlobalUIStateProvider>
+        <ThemeProvider>
+          <UserProvider>
+            <TooltipProvider>
+              <ToasterProvider />
+              <RouterProvider>
+                <AppContent />
+              </RouterProvider>
+            </TooltipProvider>
+          </UserProvider>
+        </ThemeProvider>
+      </GlobalUIStateProvider>
     </AppProvider>
   )
 }

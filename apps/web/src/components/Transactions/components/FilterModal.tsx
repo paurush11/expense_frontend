@@ -78,7 +78,7 @@ export const FilterModal = ({ isOpen, onClose, onApplyFilters }: FilterModalProp
     if (!isOpen) return null
 
     return (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="fixed inset-0 overflow-y-auto">
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" onClick={onClose} />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">

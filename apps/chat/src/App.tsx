@@ -17,7 +17,7 @@ function App() {
 
   const renderChatPortal = () => {
     return (
-      <div className={`bottom-6 right-6 fixed h-[500px] w-[400px] justify-end z-50 ${theme}`}>
+      <div className={`bottom-6 right-6 fixed h-[500px] w-[400px] justify-end ${theme}`}>
         <ChatLayout
           setTheme={setTheme}
           theme={theme}
@@ -33,7 +33,7 @@ function App() {
   return (
     <div className={theme}>
       {isChatOpen && chatContainer && createPortal(renderChatPortal(), chatContainer)}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 ">
         {!isChatOpen && (
           <button
             onClick={() => setIsChatOpen(true)}

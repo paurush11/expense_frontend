@@ -35,7 +35,7 @@ export const CreditCard = ({
     const getCardStyle = () => {
         switch (variant) {
             case 'golden':
-                return 'bg-gradient-to-l from-[#5D4157] to-[#A8CABA]'
+                return 'bg-gradient-to-l from-[#806517] to-[#FFD700]'
             case 'silver':
                 return 'bg-gradient-to-l from-[#757F9A] to-[#D7DDE8]'
             case 'blue':
@@ -50,7 +50,7 @@ export const CreditCard = ({
     const getLogoColor = () => {
         switch (variant) {
             case 'golden':
-                return 'bg-[#dc143c]'
+                return 'bg-[#806517]'
             case 'silver':
                 return 'bg-[#6B7280]'
             case 'blue':
@@ -64,7 +64,7 @@ export const CreditCard = ({
 
     return (
         <div
-            className="relative w-[450px] h-[285px] cursor-pointer [perspective:1000px] my-4 mx-auto"
+            className="relative w-[300px] h-[185px] cursor-pointer [perspective:1000px] my-4 mx-auto"
 
         >
             <div
@@ -83,41 +83,43 @@ export const CreditCard = ({
                             }}
                         />
                     </div>
-                    <div className="absolute top-10 right-10 text-white z-10">
+                    <div className="absolute top-6 right-8 text-white z-10">
                         <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} onClick={() => setIsVisible(!isVisible)} />
                     </div>
 
-                    <div className="relative p-8 w-full h-full flex flex-col justify-between" onClick={() => setIsFlipped(!isFlipped)}>
+                    <div className="relative p-6 w-full h-full flex flex-col justify-between" onClick={() => setIsFlipped(!isFlipped)}>
                         {/* Header */}
                         <div className="flex items-center">
-                            <div className={`w-10 h-10 ${getLogoColor()} shadow-[-2px_2px_0_rgba(255,255,255,0.8)] rounded-[40px_0_40px_40px] transform -rotate-45`}>
-                                <span className="block w-full h-full text-sm font-medium text-gray-200 leading-10 text-center transform rotate-45">
+                            <div className={`w-6 h-6 ${getLogoColor()} shadow-[-2px_2px_0_rgba(255,255,255,0.8)] rounded-[40px_0_40px_40px] transform -rotate-45`}>
+                                <span className="block w-full h-full text-sm font-medium text-gray-200 leading-6 text-center transform rotate-45">
                                     PB
                                 </span>
                             </div>
-                            <span className="ml-3 text-2xl font-medium uppercase text-white/80">
+                            <span className="ml-3 text-md font-medium uppercase text-white/80">
                                 Batish Public Bank
                             </span>
                         </div>
 
                         {/* Chip */}
-                        <div className="w-14 h-10 bg-[#fdd76f] rounded-lg my-5" />
+                        <div className="w-10 h-10 my-2 bg-[#fdd76f] " >
+                            <img src="/chip.svg" alt="Chip" className="w-full h-full object-contain" />
+                        </div>
 
                         {/* Card Number */}
-                        <div className="text-3xl text-white font-['OCR_A_Std',monospace] mb-5 relative ">
+                        <div className="text-lg text-white font-['OCR_A_Std',monospace] relative ">
                             <div className="flex tracking-wider justify-between">
                                 <div className="flex">
 
-                                    {isVisible ? formatCardNumber(cardNumber, 1) : '****'}
+                                    {!isVisible ? formatCardNumber(cardNumber, 1) : '****'}
                                 </div>
                                 <div className="flex">
-                                    {isVisible ? formatCardNumber(cardNumber, 2) : '****'}
+                                    {!isVisible ? formatCardNumber(cardNumber, 2) : '****'}
                                 </div>
                                 <div className="flex">
-                                    {isVisible ? formatCardNumber(cardNumber, 3) : '****'}
+                                    {!isVisible ? formatCardNumber(cardNumber, 3) : '****'}
                                 </div>
                                 <div className="flex">
-                                    {isVisible ? formatCardNumber(cardNumber, 4) : '****'}
+                                    {!isVisible ? formatCardNumber(cardNumber, 4) : '****'}
                                 </div>
 
                             </div>
@@ -128,14 +130,14 @@ export const CreditCard = ({
                             <div className="w-[70%]">
                                 <div className="text-center flex justify-start">
                                     <span className="text-xs text-[#deb887] uppercase mr-2">Expires End</span>
-                                    <span className="text-white font-['OCR_A_Std',monospace] relative -top-1">{isVisible ? expiryDate : '****'}</span>
+                                    <span className="text-white text-xs font-['OCR_A_Std',monospace] relative ">{!isVisible ? expiryDate : '****'}</span>
                                 </div>
                                 <div className="text-white font-['OCR_A_Std',monospace] mt-2 uppercase">
-                                    {isVisible ? holderName : '****'}
+                                    {!isVisible ? holderName : '****'}
                                 </div>
                             </div>
-                            <div className="relative -bottom-2">
-                                <img src="/card_logo.png" alt="Card Logo" className="w-24 h-12 object-contain" />
+                            <div className="relative shadow-xl top-2 rounded-full w-13 h-13">
+                                <img src="/card_logo.png" alt="Card Logo" className="w-12 h-12 object-contain" />
                             </div>
                         </div>
                     </div>
@@ -143,22 +145,29 @@ export const CreditCard = ({
 
                 {/* Back of the card */}
                 <div
-                    onClick={() => setIsFlipped(!isFlipped)}
+
                     className={`absolute inset-0 ${getCardStyle()} rounded-[20px] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)]`}
                 >
-                    {/* Black strip */}
-                    <div className="absolute top-10 w-full h-12 bg-black" />
+                    <div className="absolute top-13 left-8 text-white z-10">
+                        <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} onClick={() => setIsVisible(!isVisible)} />
+                    </div>
+                    <div onClick={() => setIsFlipped(!isFlipped)}>
+                        {/* Black strip */}
+                        <div className="absolute top-10 w-full h-12 bg-black" />
 
-                    {/* CVV strip */}
-                    <div className="absolute top-32 right-12 w-16 h-8 bg-white flex items-center justify-center">
-                        <span className="text-black font-mono">{cvv}</span>
+                        {/* CVV strip */}
+                        <div className="absolute top-13 right-8 w-10 h-6 bg-white flex items-center justify-center">
+                            <span className="text-black font-mono">
+                                {!isVisible ? cvv : '****'}
+                            </span>
+                        </div>
+
+                        {/* Additional info */}
+                        <div className="absolute bottom-4 left-4 right-4 text-white/80 text-xs">
+                            <p>This card is property of Public Bank. Misuse is criminal offense. If found, please return to the nearest Public Bank branch.</p>
+                        </div>
                     </div>
 
-                    {/* Additional info */}
-                    <div className="absolute bottom-12 left-12 right-12 text-white/80 text-xs">
-                        <p>This card is property of Public Bank. Misuse is criminal offense.</p>
-                        <p className="mt-2">If found, please return to the nearest Public Bank branch.</p>
-                    </div>
                 </div>
             </div>
         </div>

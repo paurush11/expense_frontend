@@ -6,11 +6,17 @@ import {
     faHome,
     faChartLine,
     faCreditCard,
-    faGear,
+    faMoneyBillTransfer,
     faUser,
+    faChartBar
 } from '@fortawesome/free-solid-svg-icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { NavItem } from '../hooks/types'
+import { TooltipProvider } from '../providers/TooltipProvider'
+import { Tooltip } from '../providers/TooltipProvider'
+import { TooltipContent } from '../providers/TooltipProvider'
+import { TooltipTrigger } from '../providers/TooltipProvider'
+import { useGlobalUIState } from '../providers/GlobalUserInterfaceProvider'
 
 interface MainLayoutProps {
     children: ReactNode
@@ -23,8 +29,9 @@ const navItems: NavItem[] = [
     { icon: faHome, path: '/', label: 'Home' },
     { icon: faChartLine, path: '/analytics', label: 'Analytics' },
     { icon: faCreditCard, path: '/transactions', label: 'Transactions' },
-    { icon: faGear, path: '/settings', label: 'Settings' },
+    { icon: faChartBar, path: '/future', label: 'Future' },
     { icon: faUser, path: '/profile', label: 'Profile' },
+    { icon: faMoneyBillTransfer, path: '/tax', label: 'Tax' },
 ]
 
 export const MainLayout = ({
@@ -35,43 +42,49 @@ export const MainLayout = ({
     const { isAuthenticated } = useUser()
     const location = useLocation()
     const navigate = useNavigate()
-
+    const { isModalOpen } = useGlobalUIState()
     const isSelected = (path: string) => location.pathname === path
 
     return (
-        <div className={`flex h-screen bg-[hsl(var(--background))] ${theme}`}>
-            {isAuthenticated && (
-                /* Fixed Sidebar Container */
-                <div className="fixed left-4 top-0 h-screen flex items-center z-60 ">
-                    {/* Sidebar with rounded corners */}
-                    <div className="w-20 h-[85%] bg-[hsl(var(--card))] flex flex-col items-center py-8 space-y-8 rounded-[30px] shadow-lg border-4 border-[hsl(var(--border))] justify-center">
+        <div className={`h-screen bg-[hsl(var(--background))] ${theme} min-w-screen relative`}>
+            {/* Main Content Area */}
+            <div className="flex flex-col h-full">
+                <Navbar onThemeChange={onThemeChange} />
+                <main className="flex-1 p-8 overflow-auto pl-28 mt-20">
+                    {children}
+                </main>
+            </div>
 
-                        <nav className="flex flex-col items-center space-y-20 py-8 justify-between">
+            {/* Sidebar - Placed after main content to ensure it's on top */}
+            {isAuthenticated && (
+                <div className={`absolute left-4 top-1/2 -translate-y-1/2 h-[85%] pointer-events-none ${isModalOpen ? 'blur-lg  bg-[hsl(var(--background))]' : ''}`}>
+                    <div className="w-20 h-full bg-[hsl(var(--card))] flex flex-col items-center py-8 space-y-8 rounded-[30px] shadow-lg border-4 border-[hsl(var(--border))] justify-center pointer-events-auto">
+                        <nav className="flex flex-col items-center space-y-2 flex-1 py-8 justify-between">
                             {navItems.map((item) => (
-                                <button
-                                    key={item.path}
-                                    onClick={() => navigate(item.path)}
-                                    className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-200 ${isSelected(item.path)
-                                        ? 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]'
-                                        : 'hover:bg-[hsl(var(--accent))] text-[hsl(var(--muted-foreground))]'
-                                        }`}
-                                    title={item.label}
-                                >
-                                    <FontAwesomeIcon icon={item.icon} className="w-5 h-5" />
-                                </button>
+                                <TooltipProvider key={item.path}>
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <div
+                                                onClick={() => navigate(item.path)}
+                                                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-200 cursor-pointer ${isSelected(item.path)
+                                                    ? 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]'
+                                                    : 'hover:bg-[hsl(var(--accent))] text-[hsl(var(--muted-foreground))]'
+                                                    }`}
+                                                title={item.label}
+                                            >
+                                                <FontAwesomeIcon icon={item.icon} className="w-5 h-5" />
+                                            </div>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            {item.label}
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
                             ))}
                         </nav>
                     </div>
                 </div>
             )}
-
-            {/* Main Content Area with left padding to account for fixed sidebar */}
-            <div className="flex-1 flex flex-col">
-                <Navbar onThemeChange={onThemeChange} />
-                <main className="flex-1 p-8 overflow-auto pl-28 z-50 mt-20">
-                    {children}
-                </main>
-            </div>
         </div>
     )
 } 

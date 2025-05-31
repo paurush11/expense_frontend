@@ -7,6 +7,7 @@ import {
     faBars
 } from '@fortawesome/free-solid-svg-icons'
 import { InsightCard } from './InsightCard'
+import { NewTransactionModal } from './NewTransactionModal'
 
 const insights = [
     {
@@ -57,12 +58,12 @@ const insights = [
 
 export const QuickSightComponents = () => {
     return (
-        <div className="space-y-4  rounded-2xl shadow-md p-6 w-[calc(26rem)] shadow-black/10 max-h-[33rem] overflow-y-auto no-scrollbar">
-            <h2 className="text-xl font-semibold mb-6 text-[hsl(var(--foreground))] bg-[hsl(var(--card))] p-4 rounded-lg">Quick Insights</h2>
+        <div className="relative space-y-4 card rounded-2xl p-6 w-full max-h-[30rem] bg-[hsl(var(--card))] shadow-float">
+            <h2 className="text-xl font-semibold text-[hsl(var(--foreground))] card py-2 px-0 rounded-lg">Quick Insights</h2>
             <div className="flex justify-between items-center">
                 <div className="flex space-x-4 items-center">
-                    <button className="text-sm text-[hsl(var(--card))] bg-[hsl(var(--success))] p-2 rounded-lg">New Transaction</button>
-                    <button className="text-sm text-[hsl(var(--card))] bg-[hsl(var(--success))] p-2 rounded-lg">Generate Report</button>
+                    <NewTransactionModal />
+                    <button className="btn btn-success text-sm text-[hsl(var(--card))] p-2 rounded-lg">Generate Report</button>
                 </div>
                 <div className="flex space-x-4 items-center">
                     <button className="text-sm text-black bg-white p-2 rounded-lg">
@@ -71,7 +72,7 @@ export const QuickSightComponents = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 overflow-y-auto no-scrollbar max-h-[20rem]">
                 {insights.map((insight, index) => (
                     <InsightCard
                         key={index}

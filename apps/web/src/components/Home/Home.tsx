@@ -51,7 +51,7 @@ export const Home = () => {
     const [showExpenseForm, setShowExpenseForm] = useState(false)
 
     return (
-        <div className="space-y-6 w-[calc(100vw-9rem)]">
+        <div className="space-y-6 relative w-full h-full">
             {/* Recent Transactions */}
             <div className="flex gap-6 justify-between">
                 <div className="w-[calc(100vw-38rem)]">
@@ -108,7 +108,7 @@ export const Home = () => {
 
             {/* Expense Form Modal */}
             {showExpenseForm && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
                     <div className="bg-[hsl(var(--card))] rounded-lg p-6 max-w-2xl w-full mx-4">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-semibold text-[hsl(var(--foreground))]">Add New Expense</h2>

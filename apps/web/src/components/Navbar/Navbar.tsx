@@ -42,10 +42,10 @@ export const Navbar = ({
 
 
     return (
-        <div className={`${isAuthenticated ? 'h-40' : 'h-20'} bg-[hsl(var(--card))] flex justify-between px-8 ${isAuthenticated && 'rounded-b-[80px]'}  fixed top-0 left-0 right-0 z-30 `}>
-            <div className="flex flex-col mt-5 z-60">
+        <div className={`${isAuthenticated ? 'h-40' : 'h-20'} bg-[hsl(var(--card))] flex justify-between px-8 ${isAuthenticated && 'rounded-b-[80px]'}  fixed top-0 left-0 right-0 `}>
+            <div className="flex flex-col mt-5 ">
                 <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-xl bg-[hsl(var(--primary))] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-[hsl(var(--primary))]  flex items-center justify-center">
                         <FontAwesomeIcon
                             icon={faWallet}
                             className="w-6 h-6 text-[hsl(var(--primary-foreground))]"
@@ -58,7 +58,7 @@ export const Navbar = ({
                     )}
                 </div>
             </div>
-            <div className="flex flex-col mt-5 z-60">
+            <div className="flex flex-col mt-5 ">
                 <div className="flex items-center space-x-6">
                     {isAuthenticated && (
                         <>

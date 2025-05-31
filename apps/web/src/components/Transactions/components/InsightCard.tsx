@@ -26,13 +26,13 @@ export const InsightCard = ({
     subtitle
 }: InsightCardProps) => {
     return (
-        <div className="p-4 rounded-lg space-y-4 bg-[hsl(var(--card))] shadow-black/10">
+        <div className="py-2 px-4 rounded-lg space-y-4 bg-[hsl(var(--accent))] shadow-card">
             <div className="flex justify-between items-center">
                 <div>
                     <p className="text-sm text-[hsl(var(--muted-foreground))]">{title}</p>
-                    <p className="text-2xl text-[hsl(var(--muted-foreground))] font-semibold">{value}</p>
+                    <p className="text-xl text-[hsl(var(--muted-foreground))] font-semibold">{value}</p>
                 </div>
-                <div className={`h-10 w-10 rounded-full ${iconBgColor} flex items-center justify-center`}>
+                <div className={`h-8 w-8 rounded-full ${iconBgColor} flex items-center justify-center shadow-lg`}>
                     <FontAwesomeIcon icon={icon} className={iconColor} />
                 </div>
             </div>
