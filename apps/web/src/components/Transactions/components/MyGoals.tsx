@@ -47,7 +47,7 @@ const goals: Goal[] = [
 
 export const MyGoals = () => {
     return (
-        <div className="bg-[hsl(var(--card))] rounded-lg p-6 mt-6">
+        <div className="bg-[hsl(var(--card))] rounded-lg p-6 mt-6 text-[hsl(var(--foreground))]">
             <h2 className="text-xl font-semibold mb-6">My Goals</h2>
             <div className="space-y-6">
                 {goals.map((goal) => {

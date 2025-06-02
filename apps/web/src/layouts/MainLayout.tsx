@@ -57,7 +57,7 @@ export const MainLayout = ({
 
             {/* Sidebar - Placed after main content to ensure it's on top */}
             {isAuthenticated && (
-                <div className={`absolute left-4 top-1/2 -translate-y-1/2 h-[85%] pointer-events-none ${isModalOpen ? 'blur-lg  bg-[hsl(var(--background))]' : ''}`}>
+                <div className={`absolute left-4 top-1/2 -translate-y-1/2 h-[75%] pointer-events-none ${isModalOpen ? 'blur-lg  bg-[hsl(var(--background))]' : ''}`}>
                     <div className="w-20 h-full bg-[hsl(var(--card))] flex flex-col items-center py-8 space-y-8 rounded-[30px] shadow-lg border-4 border-[hsl(var(--border))] justify-center pointer-events-auto">
                         <nav className="flex flex-col items-center space-y-2 flex-1 py-8 justify-between">
                             {navItems.map((item) => (

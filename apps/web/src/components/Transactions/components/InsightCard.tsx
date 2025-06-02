@@ -26,7 +26,7 @@ export const InsightCard = ({
     subtitle
 }: InsightCardProps) => {
     return (
-        <div className="py-2 px-4 rounded-lg space-y-4 bg-[hsl(var(--accent))] shadow-card">
+        <div className="py-2 px-4 rounded-lg space-y-4 bg-[hsl(var(--accent))] shadow-card text-[hsl(var(--foreground))]">
             <div className="flex justify-between items-center">
                 <div>
                     <p className="text-sm text-[hsl(var(--muted-foreground))]">{title}</p>
